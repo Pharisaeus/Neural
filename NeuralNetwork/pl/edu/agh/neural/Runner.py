@@ -15,4 +15,6 @@ def main():
     layer.set_edge_weight(0, 1, 0.5)
     print network.calculate_network_response()
 
+    print "Ciekawe czy to będzie konflikt..."
+
 main()
