@@ -4,7 +4,9 @@ class Network(object):
         self.inputs = inputs
         self.layers = []
 
-    def calculate_network_response(self):
+    def calculate_network_response(self, input_data):
+        for input, input_value in zip(self.inputs, input_data):
+            input.set_value(input_value)
         return self.layers[-1].calculate_response()
     
     def add_input(self, new_input):

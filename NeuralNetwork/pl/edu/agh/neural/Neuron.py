@@ -3,7 +3,7 @@ from pl.edu.agh.neural.edges.Bias import Bias
 
 class Neuron(AbstractInput):
 
-    def __init__(self, psp, activator):
+    def __init__(self, psp, activator, bias):
         '''
         :param psp: object responsible for calculating post-synaptic-potential
         :param activator: object responsible for calculating activation funtion
@@ -11,7 +11,7 @@ class Neuron(AbstractInput):
         self.psp = psp
         self.activator = activator
         self.inputs = []
-        self.bias = Bias(0)
+        self.bias = Bias(bias)
         
     def add_input(self, new_input):
         self.inputs.append(new_input)
