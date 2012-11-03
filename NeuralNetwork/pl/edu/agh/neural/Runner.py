@@ -9,6 +9,4 @@ def main():
     window.show()
     sys.exit(app.exec_())
 
-    print "Ciekawe czy to będzie konflikt..."
-
 main()
