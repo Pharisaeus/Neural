@@ -39,7 +39,7 @@ class LayerModel(QStandardItemModel):
     def _create_neuron(self, row):
         self.setData(self.index(row, 0), PSPUtil.default_psp())
         self.setData(self.index(row, 1), ActivatorUtil.default_activator())
-        self.setData(self.index(row, 2), 0)
+        self.setData(self.index(row, 2), 0.0)
         for i in range(3, self.columnCount()):
             self.setData(self.index(row, i), self._random_input_weight())
 

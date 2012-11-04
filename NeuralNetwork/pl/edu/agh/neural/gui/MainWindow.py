@@ -17,6 +17,7 @@ class MainWindow(QtGui.QMainWindow):
         self.scene = NetworkViewer()
         self.ui.view.setScene(self.scene)
         self.ui.view.setRenderHint(QPainter.Antialiasing)
+        self.test_data = None
 
     def _show_network(self):
         self.scene.clear()
@@ -43,8 +44,9 @@ class MainWindow(QtGui.QMainWindow):
 
     @pyqtSlot()
     def on_launchAction_triggered(self):
-        creator = SimulationLauncherDialog(self.network)
+        creator = SimulationLauncherDialog(self.network, self.test_data)
         creator.exec_()
+        self.test_data = creator.get_model()
 
     def resizeEvent(self, QResizeEvent):
         self.ui.view.fitInView(self.scene.sceneRect(), Qt.KeepAspectRatio)

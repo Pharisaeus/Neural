@@ -42,8 +42,9 @@ class NetworkViewer(QGraphicsScene):
         self.addItem(NeuronItem(position))
 
     def _draw_connections(self, neuron):
-        for input in neuron.inputs:
-            self.addItem(EdgeItem(self.neurons_positions[input.input_source], self.neurons_positions[neuron]))
+        for input in neuron.get_inputs():
+            self.addItem(EdgeItem(self.neurons_positions[input.input_source],
+                self.neurons_positions[neuron], input.get_weight()))
 
     def _compute_neuron_height(self, neurons_count):
         return self.layer_height / (neurons_count + 1)
