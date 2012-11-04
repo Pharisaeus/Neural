@@ -6,6 +6,10 @@ from pl.edu.agh.neural.edges.AbstractEdge import AbstractEdge
 class Edge(AbstractEdge):
     """
     Implementation of simple network edge
+        :param input_source: input source for this edge (should provide value)
+        :type input_source: AbstractInput
+        :param connection_weight: weight of connection with given input
+        :type connection_weight: float
     """
 
     def __init__(self, input_source, connection_weight):

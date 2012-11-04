@@ -7,6 +7,12 @@ from pl.edu.agh.neural.edges.Bias import Bias
 class Neuron(AbstractInput):
     """
     Implementation of neuron
+        :param psp: post synaptic potential function object
+        :type psp: AbstractPSP
+        :param activator: activator function object
+        :type activator: Activator
+        :param bias: bias input object
+        :type bias: Bias
     """
 
     def __init__(self, psp, activator, bias):

@@ -4,6 +4,8 @@ Implementation of neural network
 class Network(object):
     """
     Implementation of neural network
+        :param inputs: list of network inputs
+        :type inputs: list
     """
 
     def __init__(self, inputs):

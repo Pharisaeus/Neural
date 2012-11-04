@@ -6,6 +6,8 @@ from pl.edu.agh.neural.edges.AbstractEdge import AbstractEdge
 class Bias(AbstractEdge):
     """
     Implementation of bias input
+        :param connection_weight: weight of bias connection (value is always 1)
+        :type connection_weight: float
     """
 
     def __init__(self, connection_weight):
@@ -31,7 +33,7 @@ class Bias(AbstractEdge):
 
     def get_value(self):
         """
-        Method used to access value of input
+        Method used to access value of input, in case of bias it's always 1
             :return: value of input
             :rtype: float
         """

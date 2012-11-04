@@ -13,7 +13,7 @@ class Input(AbstractEdge):
 
     def get_weight(self):
         """
-        Method used to get weight of edge
+        Method used to get weight of edge, in case of simple input it's always 1
             :rtype: float
             :return: weight of given edge
         """
@@ -21,7 +21,7 @@ class Input(AbstractEdge):
     
     def set_weight(self, new_weight):
         """
-        Method used to set weight of edge
+        Mock method - weight for simple input is always 1
             :param new_weight: new weight of given edge
             :type new_weight: float
             :rtype: None
