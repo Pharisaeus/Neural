@@ -24,6 +24,15 @@ class Neuron(AbstractInput):
         
     def get_input_edge(self, number):
         return self.inputs[number]
+
+    def get_inputs(self):
+        return self.inputs
         
     def get_value(self):
         return self.activator.calculate_response(self.psp.calculate_potential(self.inputs + [self.bias]))
+
+    def get_psp(self):
+        return self.psp
+
+    def get_activator(self):
+        return self.activator

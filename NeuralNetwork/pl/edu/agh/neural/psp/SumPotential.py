@@ -1,6 +1,7 @@
 from pl.edu.agh.neural.psp.AbstractPSP import AbstractPSP
 
 class SumPotential(AbstractPSP):
+    NAME = "SumPotential"
 
     def calculate_potential(self, inputs):
         return self.__weighted_sum__(inputs)

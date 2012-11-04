@@ -3,6 +3,7 @@ from PyQt4.QtCore import pyqtSlot, Qt
 from PyQt4.QtGui import QDialog, QPainter
 from MainWindowUi import Ui_MainWindow
 from creator.NetworkCreatorDialog import NetworkCreatorDialog
+from pl.edu.agh.neural.gui.creator.NetworkModel import NetworkModel
 from pl.edu.agh.neural.gui.launcher.SimulationLauncherDialog import SimulationLauncherDialog
 from pl.edu.agh.neural.gui.view.NetworkViewer import NetworkViewer
 
@@ -30,6 +31,15 @@ class MainWindow(QtGui.QMainWindow):
             self.network = creator.create_network()
             self._show_network()
             self.ui.launchAction.setEnabled(True)
+            self.ui.editNetworkAction.setEnabled(True)
+
+    @pyqtSlot()
+    def on_editNetworkAction_triggered(self):
+        creator = NetworkCreatorDialog(NetworkModel.from_network(self.network))
+        result = creator.exec_()
+        if result == QDialog.Accepted:
+            self.network = creator.create_network()
+            self._show_network()
 
     @pyqtSlot()
     def on_launchAction_triggered(self):

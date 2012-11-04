@@ -40,7 +40,7 @@ class SimulationLauncherDialog(QDialog):
                 row = inputs[row_index]
                 response = self.network.calculate_network_response(row)
                 for i in range(len(response)):
-                    self.output_data.setData(self.output_data.index(row_index, i), str(response[i]))
+                    self.output_data.setData(self.output_data.index(row_index, i), round(response[i], 3))
 
     def _check_input(self):
         for column in range(self.input_data.columnCount()):

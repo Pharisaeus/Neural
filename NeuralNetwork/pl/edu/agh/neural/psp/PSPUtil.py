@@ -1,7 +1,7 @@
 from pl.edu.agh.neural.psp.SumPotential import SumPotential
 
 class PSPUtil(object):
-    SUM_POTENTIAL = "SumPotential"
+    SUM_POTENTIAL = SumPotential.NAME
 
     REGISTERED_PSP = {
         SUM_POTENTIAL: SumPotential()

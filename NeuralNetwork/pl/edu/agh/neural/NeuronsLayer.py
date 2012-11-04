@@ -22,7 +22,7 @@ class NeuronsLayer(object):
                 
     def set_edge_weight(self, neuron, edge, new_weight):
         self.neurons[neuron].get_input_edge(edge).set_weight(new_weight)
-        
+
     def set_bias_weight(self, neuron, new_weight):
         self.neurons[neuron].get_bias().set_weight(new_weight)
 

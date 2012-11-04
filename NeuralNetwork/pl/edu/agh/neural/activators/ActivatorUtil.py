@@ -2,8 +2,8 @@ from pl.edu.agh.neural.activators.LinearActivator import LinearActivator
 from pl.edu.agh.neural.activators.SigmoidActivator import SigmoidActivator
 
 class ActivatorUtil(object):
-    LINEAR_ACTIVATOR = "Linear Activator"
-    SIGMOID_ACTIVATOR = "Sigmoid Activator"
+    LINEAR_ACTIVATOR = LinearActivator.NAME
+    SIGMOID_ACTIVATOR = SigmoidActivator.NAME
 
     REGISTERED_ACTIVATORS = {
         LINEAR_ACTIVATOR: LinearActivator(),

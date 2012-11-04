@@ -6,11 +6,10 @@ from pl.edu.agh.neural.edges.Input import Input
 from pl.edu.agh.neural.psp.PSPUtil import PSPUtil
 
 class NetworkCreator(object):
-    def create_network(self, layers_data):
-        inputs = self._create_inputs(layers_data[0])
+    def create_network(self, network_model):
+        inputs = self._create_inputs(network_model.network_inputs())
         network = Network(inputs)
-        for layer_index in range(1, len(layers_data)):
-            layer = layers_data[layer_index]
+        for layer in network_model.layers():
             new_layer = self._create_layer(layer)
             network.add_layer(new_layer)
             self._set_weights(new_layer, layer)

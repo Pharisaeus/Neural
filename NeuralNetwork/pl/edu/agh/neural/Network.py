@@ -26,3 +26,9 @@ class Network(object):
             
     def get_layer(self, number):
         return self.layers[number]
+
+    def get_layers(self):
+        return self.layers
+
+    def inputs_count(self):
+        return len(self.inputs)
