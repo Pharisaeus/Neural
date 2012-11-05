@@ -1,6 +1,6 @@
 from random import random
 from PyQt4.QtCore import pyqtSlot
-from PyQt4.QtGui import QDialog, QStandardItemModel, QMessageBox
+from PyQt4.QtGui import QDialog, QStandardItemModel, QMessageBox, QFileDialog
 from pl.edu.agh.neural.gui.launcher.SimulationLauncherUi import Ui_SimulationLauncher
 
 class SimulationLauncherDialog(QDialog):
@@ -41,6 +41,20 @@ class SimulationLauncherDialog(QDialog):
                 response = self.network.calculate_network_response(row)
                 for i in range(len(response)):
                     self.output_data.setData(self.output_data.index(row_index, i), str(response[i]))
+
+    @pyqtSlot()
+    def on_readFileButton_clicked(self):
+        filePath = QFileDialog().getOpenFileName(None,"Select input data file")
+        try:
+            with open(filePath,"r") as file:
+                file_lines = file.readlines()
+                rows_count = len(file_lines)
+                self.ui.testsCountSpinBox.setValue(rows_count)
+                for (line,row) in zip(file_lines,range(rows_count)):
+                    for (value,column) in zip(line.split(),range(self.input_data.columnCount())):
+                        self.input_data.setData(self.input_data.index(row, column),float(value))
+        except Exception as e:
+            print e
 
     def _check_input(self):
         for column in range(self.input_data.columnCount()):
