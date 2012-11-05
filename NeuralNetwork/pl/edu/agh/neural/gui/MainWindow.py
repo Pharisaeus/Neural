@@ -17,6 +17,8 @@ class MainWindow(QtGui.QMainWindow):
         self.ui.view.setScene(self.scene)
         self.ui.view.setRenderHint(QPainter.Antialiasing)
 
+        self.creator = None
+
     def _show_network(self):
         self.scene.clear()
         self.scene.show_network(self.network)
@@ -24,10 +26,19 @@ class MainWindow(QtGui.QMainWindow):
 
     @pyqtSlot()
     def on_newNetworkAction_triggered(self):
-        creator = NetworkCreatorDialog()
-        result = creator.exec_()
+        self.creator = NetworkCreatorDialog()
+        result = self.creator.exec_()
         if result == QDialog.Accepted:
-            self.network = creator.create_network()
+            self.network = self.creator.create_network()
+            self._show_network()
+            self.ui.launchAction.setEnabled(True)
+            self.ui.editNetworkAction.setEnabled(True)
+
+    @pyqtSlot()
+    def on_editNetworkAction_triggered(self):
+        result = self.creator.exec_()
+        if result == QDialog.Accepted:
+            self.network = self.creator.create_network()
             self._show_network()
             self.ui.launchAction.setEnabled(True)
 

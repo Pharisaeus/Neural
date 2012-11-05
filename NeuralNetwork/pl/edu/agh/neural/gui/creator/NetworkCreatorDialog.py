@@ -1,5 +1,5 @@
 from PyQt4.QtCore import pyqtSlot
-from PyQt4.QtGui import QDialog
+from PyQt4.QtGui import QDialog, QFileDialog
 from NetworkCreatorUi import Ui_NetworkCreator
 from LayerModel import LayerModel
 from ComboBoxSelector import ComboBoxSelector
@@ -92,3 +92,11 @@ class NetworkCreatorDialog(QDialog):
 
     def _create_psp_combobox(self):
         return ComboBoxSelector(self.ui.neuronsTable, PSPUtil.registered_psps())
+
+    @pyqtSlot()
+    def loadNetworkButton_clicked(self):
+        pass
+
+    @pyqtSlot()
+    def saveNetworkButton_clicked(self):
+        pass
