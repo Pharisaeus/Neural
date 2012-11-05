@@ -1,6 +1,6 @@
 from random import random
 from PyQt4.QtCore import pyqtSlot
-from PyQt4.QtGui import QDialog, QStandardItemModel, QMessageBox
+from PyQt4.QtGui import QDialog, QStandardItemModel, QMessageBox, QHeaderView
 from pl.edu.agh.neural.gui.launcher.SimulationLauncherUi import Ui_SimulationLauncher
 
 class SimulationLauncherDialog(QDialog):
@@ -14,10 +14,12 @@ class SimulationLauncherDialog(QDialog):
         inputs_count = len(network.inputs)
         self.input_data = test_data or self._setup_data_model(inputs_count)
         self.ui.dataView.setModel(self.input_data)
+        self.ui.dataView.horizontalHeader().setResizeMode(QHeaderView.Stretch)
 
         outputs_count = len(network.layers[-1].neurons)
         self.output_data = self._setup_data_model(outputs_count)
         self.ui.outputView.setModel(self.output_data)
+        self.ui.outputView.horizontalHeader().setResizeMode(QHeaderView.Stretch)
 
         self._setup_headers(inputs_count, outputs_count)
         self.ui.testsCountSpinBox.setValue(self.input_data.rowCount())

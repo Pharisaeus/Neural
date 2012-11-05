@@ -4,7 +4,7 @@ from PyQt4.QtCore import QRectF, Qt, QPointF
 from PyQt4.QtGui import QGraphicsItem, QPolygonF
 
 class EdgeItem(QGraphicsItem):
-    def __init__(self, start, end, weight = None):
+    def __init__(self, start, end, weight=None):
         QGraphicsItem.__init__(self)
         self.weight = weight
         self.vector = (end[0] - start[0], end[1] - start[1])
@@ -32,7 +32,7 @@ class EdgeItem(QGraphicsItem):
                 angle = -angle
                 translation = [x * 0.7 for x in self.vector]
             painter.translate(translation[0], translation[1])
-            painter.scale(0.5,0.5)
+            painter.scale(0.5, 0.5)
             painter.rotate(numpy.degrees(angle))
             painter.drawText(0, 0, str(self.weight))
 

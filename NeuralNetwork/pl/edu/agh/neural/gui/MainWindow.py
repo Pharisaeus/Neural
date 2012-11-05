@@ -1,15 +1,14 @@
-from PyQt4 import QtGui
 from PyQt4.QtCore import pyqtSlot, Qt
-from PyQt4.QtGui import QDialog, QPainter
+from PyQt4.QtGui import QDialog, QPainter, QMainWindow
 from MainWindowUi import Ui_MainWindow
 from creator.NetworkCreatorDialog import NetworkCreatorDialog
 from pl.edu.agh.neural.gui.creator.NetworkModel import NetworkModel
 from pl.edu.agh.neural.gui.launcher.SimulationLauncherDialog import SimulationLauncherDialog
 from pl.edu.agh.neural.gui.view.NetworkViewer import NetworkViewer
 
-class MainWindow(QtGui.QMainWindow):
+class MainWindow(QMainWindow):
     def __init__(self):
-        QtGui.QMainWindow.__init__(self)
+        QMainWindow.__init__(self)
 
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
@@ -50,3 +49,7 @@ class MainWindow(QtGui.QMainWindow):
 
     def resizeEvent(self, QResizeEvent):
         self.ui.view.fitInView(self.scene.sceneRect(), Qt.KeepAspectRatio)
+
+    def show(self):
+        QMainWindow.show(self)
+        self.resizeEvent(None)

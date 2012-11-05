@@ -8,6 +8,7 @@ class NetworkViewer(QGraphicsScene):
         self.layer_width = 200
         self.layer_height = 500
         self.neurons_positions = {}
+        self.addText("Neural Networks Simulator\nv. 0.1")
 
     def show_network(self, network):
         self._draw_inputs(network.inputs)
@@ -21,7 +22,7 @@ class NetworkViewer(QGraphicsScene):
         neuron_height = self._compute_neuron_height(len(inputs))
         input_number = 1
         for input in inputs:
-            self._draw_neuron(input, input_number, neuron_height, 1)
+            self._draw_input_neuron(input, input_number, neuron_height, 1)
             input_number += 1
             self._draw_input_edge(self.neurons_positions[input])
 
@@ -36,10 +37,18 @@ class NetworkViewer(QGraphicsScene):
             self._draw_connections(neuron)
             neuron_number += 1
 
+    def _draw_input_neuron(self, neuron, neuron_number, neuron_height, layer_number):
+        position = self._compute_position(neuron, neuron_number, neuron_height, layer_number)
+        self.addItem(NeuronItem(position))
+
     def _draw_neuron(self, neuron, neuron_number, neuron_height, layer_number):
+        position = self._compute_position(neuron, neuron_number, neuron_height, layer_number)
+        self.addItem(NeuronItem(position, neuron.get_bias().get_weight()))
+
+    def _compute_position(self, neuron, neuron_number, neuron_height, layer_number):
         position = layer_number * self.layer_width, neuron_number * neuron_height
         self.neurons_positions[neuron] = position
-        self.addItem(NeuronItem(position))
+        return position
 
     def _draw_connections(self, neuron):
         for input in neuron.get_inputs():
