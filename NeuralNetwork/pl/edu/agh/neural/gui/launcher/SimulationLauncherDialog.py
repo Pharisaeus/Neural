@@ -1,10 +1,10 @@
 from random import random
 from PyQt4.QtCore import pyqtSlot
-from PyQt4.QtGui import QDialog, QStandardItemModel, QMessageBox, QFileDialog
+from PyQt4.QtGui import QDialog, QStandardItemModel, QMessageBox,QHeaderView, QFileDialog
 from pl.edu.agh.neural.gui.launcher.SimulationLauncherUi import Ui_SimulationLauncher
 
 class SimulationLauncherDialog(QDialog):
-    def __init__(self, network):
+    def __init__(self, network, test_data):
         QDialog.__init__(self)
 
         self.ui = Ui_SimulationLauncher()
@@ -12,13 +12,17 @@ class SimulationLauncherDialog(QDialog):
 
         self.network = network
         inputs_count = len(network.inputs)
-        outputs_count = len(network.layers[-1].neurons)
-        self.input_data = self._setup_data_model(inputs_count)
-        self.output_data = self._setup_data_model(outputs_count)
-        self._setup_headers(inputs_count, outputs_count)
-
+        self.input_data = test_data or self._setup_data_model(inputs_count)
         self.ui.dataView.setModel(self.input_data)
+        self.ui.dataView.horizontalHeader().setResizeMode(QHeaderView.Stretch)
+
+        outputs_count = len(network.layers[-1].neurons)
+        self.output_data = self._setup_data_model(outputs_count)
         self.ui.outputView.setModel(self.output_data)
+        self.ui.outputView.horizontalHeader().setResizeMode(QHeaderView.Stretch)
+
+        self._setup_headers(inputs_count, outputs_count)
+        self.ui.testsCountSpinBox.setValue(self.input_data.rowCount())
 
     def _setup_data_model(self, columns_count):
         data = QStandardItemModel()
@@ -40,7 +44,7 @@ class SimulationLauncherDialog(QDialog):
                 row = inputs[row_index]
                 response = self.network.calculate_network_response(row)
                 for i in range(len(response)):
-                    self.output_data.setData(self.output_data.index(row_index, i), str(response[i]))
+                    self.output_data.setData(self.output_data.index(row_index, i), round(response[i], 3))
 
     @pyqtSlot()
     def on_readFileButton_clicked(self):
@@ -67,6 +71,9 @@ class SimulationLauncherDialog(QDialog):
         return [[float(self.input_data.item(row, column).text())
                  for column in range(self.input_data.columnCount())]
                 for row in range(self.input_data.rowCount())]
+
+    def get_model(self):
+        return self.input_data
 
     @pyqtSlot()
     def on_generateRandomButton_clicked(self):

@@ -65,3 +65,9 @@ class Network(object):
                 :rtype: NeuronsLayer
                 """
         return self.layers[number]
+
+    def get_layers(self):
+        return self.layers
+
+    def inputs_count(self):
+        return len(self.inputs)

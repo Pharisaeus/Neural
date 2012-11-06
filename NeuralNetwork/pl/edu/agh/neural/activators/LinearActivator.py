@@ -8,6 +8,8 @@ class LinearActivator(Activator):
     """
     Implementation of linear activator function
     """
+    
+    NAME = "Linear Activator"
 
     def calculate_response(self, argument):
         """

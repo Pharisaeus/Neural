@@ -10,6 +10,8 @@ class SigmoidActivator(Activator):
     Implementation of sigmoid (logistic) activator function
     """
 
+    NAME = "Sigmoid Activator"
+
     def calculate_response(self, argument):
         """
          Method used to calculate response of sigmoid activation function for given argument

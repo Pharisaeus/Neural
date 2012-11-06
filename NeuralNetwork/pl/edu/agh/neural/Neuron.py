@@ -54,6 +54,10 @@ class Neuron(AbstractInput):
                 """
         return self.inputs[number]
 
+    def get_inputs(self):
+        return self.inputs
+        
+
     def get_value(self):
         """
         Method used to collect response value from this neuron
@@ -61,3 +65,9 @@ class Neuron(AbstractInput):
                 :rtype: float
         """
         return self.activator.calculate_response(self.psp.calculate_potential(self.inputs + [self.bias]))
+
+    def get_psp(self):
+        return self.psp
+
+    def get_activator(self):
+        return self.activator

@@ -7,6 +7,8 @@ class SumPotential(AbstractPSP):
     """
     Implementation of simple sum potential function
     """
+    
+    NAME = "SumPotential"
 
     def calculate_potential(self, inputs):
         """

@@ -37,4 +37,4 @@ class Bias(AbstractEdge):
             :return: value of input
             :rtype: float
         """
-        return 1.0
+        return -1.0
