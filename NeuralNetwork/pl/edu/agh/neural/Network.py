@@ -22,7 +22,9 @@ class Network(object):
         """
         for input, input_value in zip(self.inputs, input_data):
             input.set_value(input_value)
-        return self.layers[-1].calculate_response()
+        for layer in self.layers:
+            layer.calculate_response()
+        return self.layers[-1].fetch_response()
 
     def add_input(self, new_input):
         """

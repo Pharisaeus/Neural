@@ -16,7 +16,7 @@ class NetworkCreatorDialog(QDialog):
         self.ui.setupUi(self)
 
         self.model_ready = False
-        self.network_model = network_model or NetworkModel()
+        self.network_model = network_model or NetworkModel(self.ui.minWeights.value(),self.ui.maxWeights.value())
 
         self._setup_default_functions_comboboxes()
         self._setup_table()
@@ -33,7 +33,7 @@ class NetworkCreatorDialog(QDialog):
             items_count = self.ui.layerComboBox.count()
             if value > items_count:
                 for i in range(items_count + 1, value + 1):
-                    layer = self.network_model.add_layer()
+                    layer = self.network_model.add_layer(self.ui.minWeights.value(),self.ui.maxWeights.value())
                     self.ui.layerComboBox.addItem(layer.layer_name())
             elif value < items_count:
                 for i in range(value, items_count):
@@ -93,9 +93,17 @@ class NetworkCreatorDialog(QDialog):
         return ComboBoxSelector(self.ui.neuronsTable, PSPUtil.registered_psps())
 
     @pyqtSlot()
-    def loadNetworkButton_clicked(self):
+    def on_loadNetworkButton_clicked(self):
         pass
 
     @pyqtSlot()
-    def saveNetworkButton_clicked(self):
+    def on_saveNetworkButton_clicked(self):
         pass
+
+    @pyqtSlot()
+    def on_randomizeWeightsButton_clicked(self):
+        self.on_layersEdit_valueChanged(1)
+        self.network_model.remove_layer()
+        self.network_model.add_layer(self.ui.minWeights.value(),self.ui.maxWeights.value())
+        self.on_layersEdit_valueChanged(self.ui.layersEdit.value())
+        self.on_layerComboBox_currentIndexChanged(0)

@@ -31,6 +31,14 @@ class Bias(AbstractEdge):
 
         self.connection_weight = new_weight
 
+    def calculate_value(self):
+        """
+        Method used to precalculate value of input, in case of bias it does nothing
+            :return: None
+            :rtype: float
+        """
+        pass
+
     def get_value(self):
         """
         Method used to access value of input, in case of bias it's always 1

@@ -18,6 +18,10 @@ class NeuronsLayer(object):
                 :return: list of float values that are responses of every neuron in layer
                 :rtype: list
         """
+        for neuron in self.neurons:
+            neuron.calculate_value()
+
+    def fetch_response(self):
         return [neuron.get_value() for neuron in self.neurons]
 
     def add_neuron(self, new_neuron):

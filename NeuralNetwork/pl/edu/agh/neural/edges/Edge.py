@@ -33,6 +33,14 @@ class Edge(AbstractEdge):
         """
         self.connection_weight = new_weight
 
+    def calculate_value(self):
+        """
+        Method used to precalculate value of input, in case of edge it delgates call to connected neuron
+            :return: None
+            :rtype: float
+        """
+        self.input_source.calculate_value()
+
     def get_value(self):
         """
         Method used to access value of input

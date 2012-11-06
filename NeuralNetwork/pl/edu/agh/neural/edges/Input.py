@@ -37,6 +37,14 @@ class Input(AbstractEdge):
                 """
         self.value = new_value
 
+    def calculate_value(self):
+        """
+        Method used to precalculate value of input, in case of simple input it does nothing
+            :return: None
+            :rtype: float
+        """
+        pass
+
     def get_value(self):
         """
         Method used to access value of input

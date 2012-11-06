@@ -1,4 +1,4 @@
-from random import random
+from random import random, uniform
 from PyQt4.QtGui import QStandardItemModel
 from pl.edu.agh.neural.activators.ActivatorUtil import ActivatorUtil
 from pl.edu.agh.neural.psp.PSPUtil import PSPUtil
@@ -6,10 +6,12 @@ from pl.edu.agh.neural.psp.PSPUtil import PSPUtil
 class LayerModel(QStandardItemModel):
     DEFAULT_HEADER = ["PSP", "Activation", "Bias"]
 
-    def __init__(self, name, neurons_count, inputs, *__args):
+    def __init__(self, name, neurons_count, inputs,minWeight,maxWeight, *__args):
         QStandardItemModel.__init__(self, *__args)
         self.setHorizontalHeaderLabels(LayerModel.DEFAULT_HEADER)
         self.name = name
+        self.minWeight = minWeight
+        self.maxWeight = maxWeight
         self.set_neurons(neurons_count)
         self.set_input_neurons(inputs)
 
@@ -44,7 +46,7 @@ class LayerModel(QStandardItemModel):
             self.setData(self.index(row, i), self._random_input_weight())
 
     def _random_input_weight(self):
-        return round(random(), 3)
+        return round(uniform(self.minWeight,self.maxWeight), 3)
 
     def get_neurons_data(self):
         return [[str(self.item(row, column).text()) for column in range(len(LayerModel.DEFAULT_HEADER))] for row in

@@ -4,21 +4,21 @@ class NetworkModel(object):
     DEFAULT_NEURONS_COUNT = 2
     DEFAULT_INPUT_NEURONS_COUNT = 2
 
-    def __init__(self, empty=False):
+    def __init__(self,minWeight,maxWeight, empty=False):
         self.input_neurons = NetworkModel.DEFAULT_INPUT_NEURONS_COUNT
         self.layers_data = []
         if not empty:
-            self.add_layer()
+            self.add_layer(minWeight,maxWeight)
 
     def layers(self):
         return self.layers_data
 
-    def add_layer(self):
+    def add_layer(self,minWeight,maxWeight):
         layer_name = self._layer_name(len(self.layers_data) + 1)
         input_neurons = self.input_neurons
         if len(self.layers_data) != 0:
             input_neurons = self.layers_data[-1].rowCount()
-        layer_model = LayerModel(layer_name, NetworkModel.DEFAULT_NEURONS_COUNT, input_neurons)
+        layer_model = LayerModel(layer_name, NetworkModel.DEFAULT_NEURONS_COUNT, input_neurons,minWeight,maxWeight)
         self.layers_data.append(layer_model)
         return layer_model
 
