@@ -1,7 +1,6 @@
 from PyQt4.QtCore import pyqtSlot
-from PyQt4.QtGui import QDialog, QFileDialog,QHeaderView
+from PyQt4.QtGui import QDialog, QHeaderView
 from NetworkCreatorUi import Ui_NetworkCreator
-from LayerModel import LayerModel
 from ComboBoxSelector import ComboBoxSelector
 from pl.edu.agh.neural.activators.ActivatorUtil import ActivatorUtil
 from pl.edu.agh.neural.gui.creator.NetworkCreator import NetworkCreator
@@ -9,14 +8,14 @@ from pl.edu.agh.neural.gui.creator.NetworkModel import NetworkModel
 from pl.edu.agh.neural.psp.PSPUtil import PSPUtil
 
 class NetworkCreatorDialog(QDialog):
-    def __init__(self, network_model = None):
+    def __init__(self, network_model=None):
         QDialog.__init__(self)
 
         self.ui = Ui_NetworkCreator()
         self.ui.setupUi(self)
 
         self.model_ready = False
-        self.network_model = network_model or NetworkModel(self.ui.minWeights.value(),self.ui.maxWeights.value())
+        self.network_model = network_model or NetworkModel(self.ui.minWeights.value(), self.ui.maxWeights.value())
 
         self._setup_default_functions_comboboxes()
         self._setup_table()
@@ -33,7 +32,7 @@ class NetworkCreatorDialog(QDialog):
             items_count = self.ui.layerComboBox.count()
             if value > items_count:
                 for i in range(items_count + 1, value + 1):
-                    layer = self.network_model.add_layer(self.ui.minWeights.value(),self.ui.maxWeights.value())
+                    layer = self.network_model.add_layer()
                     self.ui.layerComboBox.addItem(layer.layer_name())
             elif value < items_count:
                 for i in range(value, items_count):
@@ -102,8 +101,12 @@ class NetworkCreatorDialog(QDialog):
 
     @pyqtSlot()
     def on_randomizeWeightsButton_clicked(self):
-        self.on_layersEdit_valueChanged(1)
-        self.network_model.remove_layer()
-        self.network_model.add_layer(self.ui.minWeights.value(),self.ui.maxWeights.value())
-        self.on_layersEdit_valueChanged(self.ui.layersEdit.value())
-        self.on_layerComboBox_currentIndexChanged(0)
+        self.ui.neuronsTable.model().randomize_weights(self.ui.minWeights.value(), self.ui.maxWeights.value())
+
+    @pyqtSlot(float)
+    def on_minWeights_valueChanged(self, value):
+        self.network_model.set_min_random_weights(value)
+
+    @pyqtSlot(float)
+    def on_maxWeights_valueChanged(self, value):
+        self.network_model.set_max_random_weights(value)

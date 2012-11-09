@@ -4,21 +4,23 @@ class NetworkModel(object):
     DEFAULT_NEURONS_COUNT = 2
     DEFAULT_INPUT_NEURONS_COUNT = 2
 
-    def __init__(self,minWeight,maxWeight, empty=False):
+    def __init__(self, minWeight=0.0, maxWeight=1.0, empty=False):
         self.input_neurons = NetworkModel.DEFAULT_INPUT_NEURONS_COUNT
         self.layers_data = []
+        self.minWeight = minWeight
+        self.maxWeight = maxWeight
         if not empty:
-            self.add_layer(minWeight,maxWeight)
+            self.add_layer()
 
     def layers(self):
         return self.layers_data
 
-    def add_layer(self,minWeight,maxWeight):
+    def add_layer(self):
         layer_name = self._layer_name(len(self.layers_data) + 1)
         input_neurons = self.input_neurons
         if len(self.layers_data) != 0:
             input_neurons = self.layers_data[-1].rowCount()
-        layer_model = LayerModel(layer_name, NetworkModel.DEFAULT_NEURONS_COUNT, input_neurons,minWeight,maxWeight)
+        layer_model = LayerModel(layer_name, NetworkModel.DEFAULT_NEURONS_COUNT, input_neurons, self.minWeight, self.maxWeight)
         self.layers_data.append(layer_model)
         return layer_model
 
@@ -47,6 +49,12 @@ class NetworkModel(object):
     def _layer_name(self, layer_number):
         return str(layer_number) + " layer"
 
+    def set_min_random_weights(self, value):
+        self.minWeight = value
+
+    def set_max_random_weights(self, value):
+        self.maxWeight = value
+
     @staticmethod
     def from_network(network):
         model = NetworkModel(empty=True)
@@ -62,5 +70,6 @@ class NetworkModel(object):
                 layer_model.set_bias_for_neuron(neuron_index, neuron.get_bias().get_weight())
                 inputs = neuron.get_inputs()
                 for input_index in range(len(inputs)):
-                    layer_model.set_weight_for_connection(neuron_index, input_index, neuron.get_input_edge(input_index).get_weight())
+                    layer_model.set_weight_for_connection(neuron_index, input_index,
+                        neuron.get_input_edge(input_index).get_weight())
         return model

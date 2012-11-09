@@ -12,7 +12,7 @@ class Neuron(AbstractInput):
         :param activator: activator function object
         :type activator: Activator
         :param bias: bias input object
-        :type bias: Bias
+        :type bias: float
     """
 
     def __init__(self, psp, activator, bias):
