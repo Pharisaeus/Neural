@@ -47,6 +47,8 @@
      <string>Network</string>
     </property>
     <addaction name="newNetworkAction"/>
+    <addaction name="openNetworkAction"/>
+    <addaction name="saveNetworkAction"/>
     <addaction name="editNetworkAction"/>
     <addaction name="separator"/>
     <addaction name="launchAction"/>
@@ -72,6 +74,19 @@
    </property>
    <property name="text">
     <string>Edit network</string>
+   </property>
+  </action>
+  <action name="openNetworkAction">
+   <property name="text">
+    <string>Open network</string>
+   </property>
+  </action>
+  <action name="saveNetworkAction">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Save network</string>
    </property>
   </action>
  </widget>
