@@ -5,10 +5,11 @@ from ComboBoxSelector import ComboBoxSelector
 from pl.edu.agh.neural.activators.ActivatorUtil import ActivatorUtil
 from pl.edu.agh.neural.gui.creator.NetworkCreator import NetworkCreator
 from pl.edu.agh.neural.gui.creator.NetworkModel import NetworkModel
+from pl.edu.agh.neural.learning.kohonen.KohonenNetwork import KohonenNetwork
 from pl.edu.agh.neural.psp.PSPUtil import PSPUtil
 
 class NetworkCreatorDialog(QDialog):
-    def __init__(self, network_model=None):
+    def __init__(self, network_model=None, kohonen=False):
         QDialog.__init__(self)
 
         self.ui = Ui_NetworkCreator()
@@ -22,9 +23,13 @@ class NetworkCreatorDialog(QDialog):
         self._setup_network_parameters()
         self.ui.neuronsTable.setModel(self.network_model.default_layer())
         self.model_ready = True
+        self.ui.kohonenNetwork.setChecked(kohonen)
 
     def create_network(self):
-        return NetworkCreator().create_network(self.network_model)
+        basic_network = NetworkCreator().create_network(self.network_model)
+        if self.ui.kohonenNetwork.isChecked():
+            return KohonenNetwork(basic_network)
+        return basic_network
 
     @pyqtSlot(int)
     def on_layersEdit_valueChanged(self, value):

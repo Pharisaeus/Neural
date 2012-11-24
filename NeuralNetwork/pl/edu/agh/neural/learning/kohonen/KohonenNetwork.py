@@ -1,7 +1,8 @@
 from pl.edu.agh.neural.Network import Network
+from pl.edu.agh.neural.learning.kohonen.metrics.EuclideanMetric import EuclideanMetric
 
 class KohonenNetwork(Network):
-    def __init__(self, network, metric):
+    def __init__(self, network, metric=EuclideanMetric()):
         super(KohonenNetwork, self).__init__([])
         self.add_layer(network.get_layer(0))
         self.inputs = network.inputs
