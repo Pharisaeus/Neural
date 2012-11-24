@@ -34,7 +34,7 @@ class EdgeItem(QGraphicsItem):
             painter.translate(translation[0], translation[1])
             painter.scale(0.5, 0.5)
             painter.rotate(numpy.degrees(angle))
-            painter.drawText(0, 0, str(self.weight))
+            painter.drawText(0, 0, str(round(self.weight, 3)))
 
     def _scale_vector(self, vector):
         ratio = 1 - 20 / linalg.norm(vector)

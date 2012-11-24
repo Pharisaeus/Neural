@@ -6,6 +6,7 @@ from creator.NetworkCreatorDialog import NetworkCreatorDialog
 from pl.edu.agh.neural.gui.creator.NetworkModel import NetworkModel
 from pl.edu.agh.neural.gui.launcher.SimulationLauncherDialog import SimulationLauncherDialog
 from pl.edu.agh.neural.gui.view.NetworkViewer import NetworkViewer
+from pl.edu.agh.neural.learning.kohonen.gui.LearningLauncherDialog import LearningLauncherDialog
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -30,6 +31,7 @@ class MainWindow(QMainWindow):
         self.ui.launchAction.setEnabled(True)
         self.ui.editNetworkAction.setEnabled(True)
         self.ui.saveNetworkAction.setEnabled(True)
+        self.ui.menuLearning.setEnabled(True)
 
     @pyqtSlot()
     def on_newNetworkAction_triggered(self):
@@ -40,14 +42,14 @@ class MainWindow(QMainWindow):
             self._show_network()
             self._activate_actions()
 
-#    @pyqtSlot()
-#    def on_editNetworkAction_triggered(self):
-#        result = self.creator.exec_()
-#        if result == QDialog.Accepted:
-#            self.network = self.creator.create_network()
-#            self._show_network()
-#            self.ui.launchAction.setEnabled(True)
-#            self.ui.editNetworkAction.setEnabled(True)
+        #    @pyqtSlot()
+        #    def on_editNetworkAction_triggered(self):
+        #        result = self.creator.exec_()
+        #        if result == QDialog.Accepted:
+        #            self.network = self.creator.create_network()
+        #            self._show_network()
+        #            self.ui.launchAction.setEnabled(True)
+        #            self.ui.editNetworkAction.setEnabled(True)
 
     @pyqtSlot()
     def on_editNetworkAction_triggered(self):
@@ -82,6 +84,14 @@ class MainWindow(QMainWindow):
                 yaml.dump(self.network, file)
         except Exception as e:
             print e
+
+    @pyqtSlot()
+    def on_kohonenNetworkAction_triggered(self):
+        launcher = LearningLauncherDialog(self.network)
+        result = launcher.exec_()
+        if result == QDialog.Accepted:
+            self.network = launcher.create_kohonen_network()
+            self._show_network()
 
     def resizeEvent(self, QResizeEvent):
         self.ui.view.fitInView(self.scene.sceneRect(), Qt.KeepAspectRatio)

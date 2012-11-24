@@ -8,7 +8,7 @@ class NetworkViewer(QGraphicsScene):
         self.layer_width = 200
         self.layer_height = 500
         self.neurons_positions = {}
-        self.addText("Neural Networks Simulator\nv. 0.1")
+        self.addText("Neural Networks Simulator\nv. 0.3")
 
     def show_network(self, network):
         self._draw_inputs(network.inputs)

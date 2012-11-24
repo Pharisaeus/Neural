@@ -78,3 +78,6 @@ class Neuron(AbstractInput):
 
     def get_activator(self):
         return self.activator
+
+    def get_weights(self):
+        return [input.get_weight() for input in self.inputs]

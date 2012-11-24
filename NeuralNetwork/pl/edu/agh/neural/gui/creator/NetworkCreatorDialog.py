@@ -1,6 +1,5 @@
 from PyQt4.QtCore import pyqtSlot
-from PyQt4.QtGui import QDialog, QHeaderView, QFileDialog
-import yaml
+from PyQt4.QtGui import QDialog, QHeaderView
 from NetworkCreatorUi import Ui_NetworkCreator
 from ComboBoxSelector import ComboBoxSelector
 from pl.edu.agh.neural.activators.ActivatorUtil import ActivatorUtil

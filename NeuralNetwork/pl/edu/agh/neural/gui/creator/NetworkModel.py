@@ -20,7 +20,8 @@ class NetworkModel(object):
         input_neurons = self.input_neurons
         if len(self.layers_data) != 0:
             input_neurons = self.layers_data[-1].rowCount()
-        layer_model = LayerModel(layer_name, NetworkModel.DEFAULT_NEURONS_COUNT, input_neurons, self.minWeight, self.maxWeight)
+        layer_model = LayerModel(layer_name, NetworkModel.DEFAULT_NEURONS_COUNT, input_neurons, self.minWeight,
+            self.maxWeight)
         self.layers_data.append(layer_model)
         return layer_model
 
@@ -71,5 +72,5 @@ class NetworkModel(object):
                 inputs = neuron.get_inputs()
                 for input_index in range(len(inputs)):
                     layer_model.set_weight_for_connection(neuron_index, input_index,
-                        neuron.get_input_edge(input_index).get_weight())
+                        round(neuron.get_input_edge(input_index).get_weight(), 3))
         return model

@@ -1,6 +1,7 @@
 """
 Implementation of neural network
 """
+
 class Network(object):
     """
     Implementation of neural network
@@ -33,7 +34,7 @@ class Network(object):
                 :type new_input: Input
         """
         self.inputs.append(new_input)
-    
+
     def add_layer(self, new_layer):
         """
         Method used to add new layer to this network
@@ -45,7 +46,7 @@ class Network(object):
         else:
             new_layer.set_inputs(self.layers[-1].get_neurons())
         self.layers.append(new_layer)
-        
+
     def add_neuron_to_layer(self, layer_number, new_neuron):
         """
         Method used to add new neuron to given neurons layer
@@ -73,3 +74,6 @@ class Network(object):
 
     def inputs_count(self):
         return len(self.inputs)
+
+    def get_inputs(self):
+        return self.inputs
