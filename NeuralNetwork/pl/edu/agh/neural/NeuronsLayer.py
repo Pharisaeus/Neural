@@ -8,11 +8,12 @@ class NeuronsLayer(object):
     """
     Implementation of single layer of neurons
     """
+    NAME = "General layer"
 
     def __init__(self):
         self.neurons = []
 
-    def calculate_response(self):
+    def calculate_response(self, input):
         """
         Method used to calculate response of this layer
                 :return: list of float values that are responses of every neuron in layer
@@ -31,7 +32,7 @@ class NeuronsLayer(object):
                 :type new_neuron: Neuron
         """
         self.neurons.append(new_neuron)
-            
+
     def add_input_neuron(self, input_neuron):
         """
         Method used to add new input for this layer
@@ -40,7 +41,7 @@ class NeuronsLayer(object):
         """
         for neuron in self.neurons:
             neuron.add_input(Edge(input_neuron, random.random()))
-                
+
     def set_inputs(self, new_inputs):
         """
         Method used to set new set of inputs for this layer

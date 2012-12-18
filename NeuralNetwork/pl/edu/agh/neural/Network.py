@@ -1,6 +1,7 @@
 """
 Implementation of neural network
 """
+from pl.edu.agh.neural.utils.DataNormalizer import DataNormalizer
 
 class Network(object):
     """
@@ -21,11 +22,15 @@ class Network(object):
             :return: list of response signals
             :rtype: list
         """
+        self.set_input_data(input_data)
+        for layer in self.layers:
+            layer.calculate_response(input_data)
+        return self.layers[-1].fetch_response()
+
+    def set_input_data(self, input_data):
+        input_data = DataNormalizer.normalize([input_data])[0]
         for input, input_value in zip(self.inputs, input_data):
             input.set_value(input_value)
-        for layer in self.layers:
-            layer.calculate_response()
-        return self.layers[-1].fetch_response()
 
     def add_input(self, new_input):
         """

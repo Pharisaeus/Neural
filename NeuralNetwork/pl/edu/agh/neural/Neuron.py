@@ -25,7 +25,7 @@ class Neuron(AbstractInput):
         """
         Method used to add new input for this layer
                 :param new_input: new input for this neuron
-                :type new_input: AbstractInput
+                :type new_input: Input
         """
         self.inputs.append(new_input)
 
@@ -50,7 +50,7 @@ class Neuron(AbstractInput):
                 :param number: number of input edge we want to access
                 :type number: int
                 :return: selected input edge
-                :rtype: AbstractInput
+                :rtype: Input
                 """
         return self.inputs[number]
 
@@ -73,6 +73,9 @@ class Neuron(AbstractInput):
         """
         return self.value
 
+    def set_value(self, value):
+        self.value = value
+
     def get_psp(self):
         return self.psp
 
@@ -81,3 +84,7 @@ class Neuron(AbstractInput):
 
     def get_weights(self):
         return [input.get_weight() for input in self.inputs]
+
+    def change_weight(self, input, value):
+        edge = self.get_input_edge(input)
+        edge.set_weight(edge.get_weight() + float(value))

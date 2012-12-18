@@ -7,8 +7,7 @@ class ConscientiousNeuron(object):
         return self.neuron.get_weights()
 
     def change_weight(self, input, value):
-        edge = self.neuron.get_input_edge(input)
-        edge.set_weight(edge.get_weight() + float(value))
+        self.neuron.change_weight(input, value)
 
     def adjust_potential(self, value):
         if self.potential + value < 1:

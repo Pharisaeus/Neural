@@ -8,7 +8,7 @@ class LinearActivator(Activator):
     """
     Implementation of linear activator function
     """
-    
+
     NAME = "Linear Activator"
 
     def calculate_response(self, argument):
@@ -20,3 +20,6 @@ class LinearActivator(Activator):
                 :rtype: float
         """
         return argument
+
+    def derivative(self, argument):
+        return 1

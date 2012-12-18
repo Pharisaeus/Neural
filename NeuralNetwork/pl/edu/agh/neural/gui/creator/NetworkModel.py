@@ -1,3 +1,4 @@
+from pl.edu.agh.neural.Layers import Layers
 from pl.edu.agh.neural.gui.creator.LayerModel import LayerModel
 
 class NetworkModel(object):
@@ -20,7 +21,8 @@ class NetworkModel(object):
         input_neurons = self.input_neurons
         if len(self.layers_data) != 0:
             input_neurons = self.layers_data[-1].rowCount()
-        layer_model = LayerModel(layer_name, NetworkModel.DEFAULT_NEURONS_COUNT, input_neurons, self.minWeight,
+        layer_model = LayerModel(layer_name, Layers.default_layer(), NetworkModel.DEFAULT_NEURONS_COUNT, input_neurons,
+            self.minWeight,
             self.maxWeight)
         self.layers_data.append(layer_model)
         return layer_model
@@ -63,6 +65,7 @@ class NetworkModel(object):
         for layer in network.get_layers():
             layer_model = model.add_layer()
             neurons = layer.get_neurons()
+            layer_model.set_layer_type(Layers.get_type(layer))
             layer_model.set_neurons(len(neurons))
             for neuron_index in range(len(neurons)):
                 neuron = neurons[neuron_index]

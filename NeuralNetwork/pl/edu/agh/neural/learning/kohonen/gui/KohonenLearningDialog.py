@@ -1,18 +1,17 @@
 from math import ceil
-import numpy
 from PyQt4.QtCore import pyqtSlot
 from PyQt4.QtGui import QDialog, QFileDialog
 from pl.edu.agh.neural.gui.common.DataView import DataView
+from pl.edu.agh.neural.learning.factors.LearningFactorUtil import LearningFactorUtil
 from pl.edu.agh.neural.learning.kohonen.KohonenLearning import KohonenLearning
-from pl.edu.agh.neural.learning.kohonen.KohonenNetwork import KohonenNetwork
-from pl.edu.agh.neural.learning.kohonen.factors.LearningFactorUtil import LearningFactorUtil
 from pl.edu.agh.neural.learning.kohonen.gui.LearningLauncherUi import Ui_LearningLauncher
 from pl.edu.agh.neural.learning.kohonen.metrics.MetricUtil import MetricUtil
 from pl.edu.agh.neural.learning.kohonen.neighbourhood.NeighbourhoodUtil import NeighbourhoodUtil
 from pl.edu.agh.neural.learning.kohonen.topology.NoTopology import NoTopology
 from pl.edu.agh.neural.learning.kohonen.topology.TopologyUtil import TopologyUtil
+from pl.edu.agh.neural.utils.DataNormalizer import DataNormalizer
 
-class LearningLauncherDialog(QDialog):
+class KohonenLearningDialog(QDialog):
     def __init__(self, network):
         QDialog.__init__(self)
 
@@ -27,9 +26,6 @@ class LearningLauncherDialog(QDialog):
         self.input_view = DataView(self.ui.learningDataView, header="Input",
             columns=network.inputs_count())
         self.input_view.randomize_data()
-
-    def create_kohonen_network(self):
-        return KohonenNetwork(self.network, self.metric)
 
     @pyqtSlot()
     def on_runButton_clicked(self):
@@ -50,7 +46,7 @@ class LearningLauncherDialog(QDialog):
         learning_iterations = int(self.ui.learningIterations.text())
         learning = KohonenLearning(self.network_layer, topology, self.metric, learning_factor,
             conscience_threshold)
-        learning.learn([v / numpy.float64(sum(v)) for v in self.input_view.get_data()], learning_iterations)
+        learning.learn(DataNormalizer.normalize(self.input_view.get_data()), learning_iterations)
         self.accept()
 
     @pyqtSlot()

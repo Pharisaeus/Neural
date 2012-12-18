@@ -26,14 +26,7 @@
          <layout class="QHBoxLayout" name="horizontalLayout_4">
           <item>
            <layout class="QGridLayout" name="gridLayout_2">
-            <item row="2" column="0">
-             <widget class="QLabel" name="label">
-              <property name="text">
-               <string>Layers</string>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="1">
+            <item row="1" column="1">
              <widget class="QSpinBox" name="layersEdit">
               <property name="minimum">
                <number>1</number>
@@ -46,37 +39,7 @@
               </property>
              </widget>
             </item>
-            <item row="3" column="0">
-             <widget class="QLabel" name="label_6">
-              <property name="text">
-               <string>Random weights min</string>
-              </property>
-             </widget>
-            </item>
             <item row="3" column="1">
-             <widget class="QDoubleSpinBox" name="minWeights">
-              <property name="minimumSize">
-               <size>
-                <width>100</width>
-                <height>0</height>
-               </size>
-              </property>
-              <property name="minimum">
-               <double>-100.000000000000000</double>
-              </property>
-              <property name="maximum">
-               <double>100.000000000000000</double>
-              </property>
-             </widget>
-            </item>
-            <item row="4" column="0">
-             <widget class="QLabel" name="label_7">
-              <property name="text">
-               <string>Random weights max</string>
-              </property>
-             </widget>
-            </item>
-            <item row="4" column="1">
              <widget class="QDoubleSpinBox" name="maxWeights">
               <property name="minimumSize">
                <size>
@@ -101,10 +64,40 @@
               </property>
              </widget>
             </item>
-            <item row="1" column="0" colspan="2">
-             <widget class="QCheckBox" name="kohonenNetwork">
+            <item row="3" column="0">
+             <widget class="QLabel" name="label_7">
               <property name="text">
-               <string>Kohonen network</string>
+               <string>Random weights max</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="0">
+             <widget class="QLabel" name="label_6">
+              <property name="text">
+               <string>Random weights min</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QDoubleSpinBox" name="minWeights">
+              <property name="minimumSize">
+               <size>
+                <width>100</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="minimum">
+               <double>-100.000000000000000</double>
+              </property>
+              <property name="maximum">
+               <double>100.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QLabel" name="label">
+              <property name="text">
+               <string>Layers</string>
               </property>
              </widget>
             </item>
@@ -154,13 +147,6 @@
          <layout class="QVBoxLayout" name="verticalLayout_3">
           <item>
            <layout class="QGridLayout" name="gridLayout">
-            <item row="0" column="0">
-             <widget class="QLabel" name="layerLabel">
-              <property name="text">
-               <string>Layer</string>
-              </property>
-             </widget>
-            </item>
             <item row="0" column="1">
              <widget class="QComboBox" name="layerComboBox">
               <property name="minimumSize">
@@ -177,14 +163,38 @@
               </property>
              </widget>
             </item>
-            <item row="1" column="0">
+            <item row="2" column="0">
              <widget class="QLabel" name="neuronsLabel">
               <property name="text">
                <string>Neurons</string>
               </property>
              </widget>
             </item>
-            <item row="1" column="1">
+            <item row="4" column="0">
+             <widget class="QLabel" name="activationLabel_2">
+              <property name="text">
+               <string>Default Activation</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="1">
+             <widget class="QComboBox" name="defaultActivationComboBox">
+              <property name="minimumSize">
+               <size>
+                <width>100</width>
+                <height>0</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+            <item row="7" column="0" colspan="2">
+             <widget class="QPushButton" name="randomizeWeightsButton">
+              <property name="text">
+               <string>Randomize weights for layer</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
              <widget class="QSpinBox" name="neuronsEdit">
               <property name="minimumSize">
                <size>
@@ -203,14 +213,14 @@
               </property>
              </widget>
             </item>
-            <item row="2" column="0">
+            <item row="3" column="0">
              <widget class="QLabel" name="pSPLabel_2">
               <property name="text">
                <string>Default PSP</string>
               </property>
              </widget>
             </item>
-            <item row="2" column="1">
+            <item row="3" column="1">
              <widget class="QComboBox" name="defaultPSPComboBox">
               <property name="minimumSize">
                <size>
@@ -220,27 +230,20 @@
               </property>
              </widget>
             </item>
-            <item row="3" column="0">
-             <widget class="QLabel" name="activationLabel_2">
+            <item row="0" column="0">
+             <widget class="QLabel" name="layerLabel">
               <property name="text">
-               <string>Default Activation</string>
+               <string>Layer</string>
               </property>
              </widget>
             </item>
-            <item row="3" column="1">
-             <widget class="QComboBox" name="defaultActivationComboBox">
-              <property name="minimumSize">
-               <size>
-                <width>100</width>
-                <height>0</height>
-               </size>
-              </property>
-             </widget>
+            <item row="1" column="1">
+             <widget class="QComboBox" name="layerTypeSelector"/>
             </item>
-            <item row="6" column="0" colspan="2">
-             <widget class="QPushButton" name="randomizeWeightsButton">
+            <item row="1" column="0">
+             <widget class="QLabel" name="label_2">
               <property name="text">
-               <string>Randomize weights for layer</string>
+               <string>Layer type</string>
               </property>
              </widget>
             </item>
@@ -317,7 +320,7 @@
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>1188</x>
+     <x>212</x>
      <y>704</y>
     </hint>
     <hint type="destinationlabel">
@@ -333,28 +336,12 @@
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>1188</x>
+     <x>212</x>
      <y>704</y>
     </hint>
     <hint type="destinationlabel">
      <x>286</x>
      <y>274</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>kohonenNetwork</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>layersEdit</receiver>
-   <slot>setDisabled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>86</x>
-     <y>46</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>163</x>
-     <y>68</y>
     </hint>
    </hints>
   </connection>

@@ -60,7 +60,7 @@
     <property name="title">
      <string>Learning</string>
     </property>
-    <addaction name="kohonenNetworkAction"/>
+    <addaction name="learnAction"/>
    </widget>
    <addaction name="menuNetwork"/>
    <addaction name="menuLearning"/>
@@ -99,9 +99,12 @@
     <string>Save network</string>
    </property>
   </action>
-  <action name="kohonenNetworkAction">
+  <action name="learnAction">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
    <property name="text">
-    <string>Kohonen network</string>
+    <string>Learn</string>
    </property>
   </action>
  </widget>

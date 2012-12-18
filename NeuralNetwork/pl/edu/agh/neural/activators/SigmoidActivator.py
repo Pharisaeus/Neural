@@ -21,3 +21,6 @@ class SigmoidActivator(Activator):
                 :rtype: float
         """
         return 1.0 / (1 + exp(-argument))
+
+    def derivative(self, argument):
+        return argument * (1 - argument)

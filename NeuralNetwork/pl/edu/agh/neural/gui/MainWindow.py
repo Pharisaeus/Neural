@@ -5,9 +5,8 @@ from MainWindowUi import Ui_MainWindow
 from creator.NetworkCreatorDialog import NetworkCreatorDialog
 from pl.edu.agh.neural.gui.creator.NetworkModel import NetworkModel
 from pl.edu.agh.neural.gui.launcher.SimulationLauncherDialog import SimulationLauncherDialog
+from pl.edu.agh.neural.gui.learning.LearningLauncher import LearningLauncher
 from pl.edu.agh.neural.gui.view.NetworkViewer import NetworkViewer
-from pl.edu.agh.neural.learning.kohonen.KohonenNetwork import KohonenNetwork
-from pl.edu.agh.neural.learning.kohonen.gui.LearningLauncherDialog import LearningLauncherDialog
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -45,8 +44,7 @@ class MainWindow(QMainWindow):
 
     @pyqtSlot()
     def on_editNetworkAction_triggered(self):
-        creator = NetworkCreatorDialog(NetworkModel.from_network(self.network),
-            isinstance(self.network, KohonenNetwork))
+        creator = NetworkCreatorDialog(NetworkModel.from_network(self.network))
         result = creator.exec_()
         if result == QDialog.Accepted:
             self.network = creator.create_network()
@@ -79,11 +77,10 @@ class MainWindow(QMainWindow):
             print e
 
     @pyqtSlot()
-    def on_kohonenNetworkAction_triggered(self):
-        launcher = LearningLauncherDialog(self.network)
+    def on_learnAction_triggered(self):
+        launcher = LearningLauncher.dialog(self.network)
         result = launcher.exec_()
         if result == QDialog.Accepted:
-            self.network = launcher.create_kohonen_network()
             self._show_network()
 
     def resizeEvent(self, QResizeEvent):

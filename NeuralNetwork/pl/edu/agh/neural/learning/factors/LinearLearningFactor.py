@@ -1,4 +1,4 @@
-from pl.edu.agh.neural.learning.kohonen.factors.LearningFactor import LearningFactor
+from pl.edu.agh.neural.learning.factors.LearningFactor import LearningFactor
 
 class LinearLearningFactor(LearningFactor):
     NAME = "Linear learning factor"

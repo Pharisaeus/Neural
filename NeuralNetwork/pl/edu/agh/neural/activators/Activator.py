@@ -16,3 +16,6 @@ class Activator(object):
                 :rtype: float
         """
         raise NotImplementedError("Subclass must implement abstract method")
+
+    def derivative(self, argument):
+        raise NotImplementedError("Subclass must implement abstract method")

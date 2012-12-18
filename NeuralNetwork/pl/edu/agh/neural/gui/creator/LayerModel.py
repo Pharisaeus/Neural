@@ -6,14 +6,21 @@ from pl.edu.agh.neural.psp.PSPUtil import PSPUtil
 class LayerModel(QStandardItemModel):
     DEFAULT_HEADER = ["PSP", "Activation", "Bias"]
 
-    def __init__(self, name, neurons_count, inputs, minWeight, maxWeight, *__args):
+    def __init__(self, name, layer_type, neurons_count, inputs, minWeight, maxWeight, *__args):
         QStandardItemModel.__init__(self, *__args)
         self.setHorizontalHeaderLabels(LayerModel.DEFAULT_HEADER)
         self.name = name
+        self.type = layer_type
         self.minWeight = minWeight
         self.maxWeight = maxWeight
         self.set_neurons(neurons_count)
         self.set_input_neurons(inputs)
+
+    def set_layer_type(self, value):
+        self.type = value
+
+    def layer_type(self):
+        return self.type
 
     def set_neurons(self, size):
         old_row_count = self.rowCount()

@@ -1,6 +1,6 @@
+from pl.edu.agh.neural.Layers import Layers
 from pl.edu.agh.neural.Network import Network
 from pl.edu.agh.neural.Neuron import Neuron
-from pl.edu.agh.neural.NeuronsLayer import NeuronsLayer
 from pl.edu.agh.neural.activators.ActivatorUtil import ActivatorUtil
 from pl.edu.agh.neural.edges.Input import Input
 from pl.edu.agh.neural.psp.PSPUtil import PSPUtil
@@ -19,7 +19,7 @@ class NetworkCreator(object):
         return [Input() for _ in range(inputs)]
 
     def _create_layer(self, standard_layer_data):
-        layer = NeuronsLayer()
+        layer = Layers.create_layer(standard_layer_data.layer_type())
         layer_data = standard_layer_data.get_neurons_data()
         for neuron_data in layer_data:
             layer.add_neuron(Neuron(
