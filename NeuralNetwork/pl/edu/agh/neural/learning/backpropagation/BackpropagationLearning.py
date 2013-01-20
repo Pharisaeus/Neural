@@ -71,6 +71,6 @@ class BackpropagationLearning(object):
     def extract_data(self, learning_data):
         inputs_count = self.network.inputs_count()
         outputs_count = len(learning_data[0])
-        input_data = DataNormalizer.normalize([[case[i]  for i in range(inputs_count)]  for case in learning_data])
+        input_data = [[case[i]  for i in range(inputs_count)]  for case in learning_data]
         output_data = [[case[i] for i in range(inputs_count, outputs_count)] for case in learning_data]
         return input_data, output_data

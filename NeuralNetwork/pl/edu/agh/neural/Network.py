@@ -28,7 +28,7 @@ class Network(object):
         return self.layers[-1].fetch_response()
 
     def set_input_data(self, input_data):
-        input_data = DataNormalizer.normalize([input_data])[0]
+        #input_data = DataNormalizer.normalize([input_data])[0]
         for input, input_value in zip(self.inputs, input_data):
             input.set_value(input_value)
 
