@@ -12,6 +12,7 @@ class Bias(AbstractEdge):
 
     def __init__(self, connection_weight):
         self.connection_weight = connection_weight
+        self.value = -1.0
 
     def get_weight(self):
         """
@@ -28,7 +29,6 @@ class Bias(AbstractEdge):
             :type new_weight: float
             :rtype: None
         """
-
         self.connection_weight = new_weight
 
     def calculate_value(self):
@@ -45,4 +45,10 @@ class Bias(AbstractEdge):
             :return: value of input
             :rtype: float
         """
-        return -1.0
+        return self.value
+
+    def enable(self):
+        self.value=-1.0
+
+    def disable(self):
+        self.value=0.0

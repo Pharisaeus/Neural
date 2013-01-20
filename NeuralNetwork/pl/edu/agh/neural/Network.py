@@ -82,3 +82,11 @@ class Network(object):
 
     def get_inputs(self):
         return self.inputs
+
+    def enable_bias(self):
+        for layer in self.get_layers():
+            layer.enable_bias()
+
+    def disable_bias(self):
+        for layer in self.get_layers():
+            layer.disable_bias()

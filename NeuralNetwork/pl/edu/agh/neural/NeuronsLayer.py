@@ -90,3 +90,11 @@ class NeuronsLayer(object):
                 :rtype: Neuron
         """
         return self.neurons[number]
+
+    def enable_bias(self):
+        for neuron in self.get_neurons():
+            neuron.enable_bias()
+
+    def disable_bias(self):
+        for neuron in self.get_neurons():
+            neuron.disable_bias()

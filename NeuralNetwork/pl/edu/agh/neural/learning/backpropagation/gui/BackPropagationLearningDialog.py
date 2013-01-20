@@ -18,18 +18,17 @@ class BackPropagationLearningDialog(QDialog):
         self._setup_gui()
 
         self.input_view = DataView(self.ui.learningDataView, header="Input",
-            columns=network.inputs_count())
+            columns=network.inputs_count()+len(network.get_layer(-1).get_neurons()))
         self.input_view.randomize_data()
 
     @pyqtSlot()
     def on_runButton_clicked(self):
-        self.error_metric = ErrorUtil.get_factor(str(self.ui.errorMetricSelector.currentText()))()
-        learning_factor = LearningFactorUtil.get_factor(str(self.ui.learningFactorSelector.currentText()),
-            float(self.ui.learningFactorInitialValue.text()), int(self.ui.learningIterations.text()))
-
+        error_metric = ErrorUtil.get_factor(str(self.ui.errorMetricSelector.currentText()))()
+        learning_factor = float(self.ui.learningFactorValue.text())
         momentum = float(self.ui.momentumValue.text())
         learning_iterations = int(self.ui.learningIterations.text())
-        learning = BackpropagationLearning(self.network, self.metric, learning_factor, momentum)
+        bias_enabled =  self.ui.biasEnabled
+        learning = BackpropagationLearning(self.network, error_metric, learning_factor, momentum,bias_enabled)
         learning.learn(DataNormalizer.normalize(self.input_view.get_data()), learning_iterations)
         self.accept()
 

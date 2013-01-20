@@ -51,7 +51,7 @@ class NetworkViewer(QGraphicsScene):
         return position
 
     def _draw_connections(self, neuron):
-        for input in neuron.get_inputs():
+        for input in neuron.inputs:
             self.addItem(EdgeItem(self.neurons_positions[input.input_source],
                 self.neurons_positions[neuron], input.get_weight()))
 

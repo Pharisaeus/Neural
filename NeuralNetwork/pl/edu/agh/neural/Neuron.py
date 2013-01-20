@@ -52,10 +52,10 @@ class Neuron(AbstractInput):
                 :return: selected input edge
                 :rtype: Input
                 """
-        return self.inputs[number]
+        return self.get_inputs()[number]
 
     def get_inputs(self):
-        return self.inputs
+        return self.inputs + [self.bias]
 
     def calculate_value(self):
         """
@@ -63,7 +63,7 @@ class Neuron(AbstractInput):
             :return: None
             :rtype: float
         """
-        self.value = self.activator.calculate_response(self.psp.calculate_potential(self.inputs + [self.bias]))
+        self.value = self.activator.calculate_response(self.get_psp_value())
 
     def get_value(self):
         """
@@ -80,14 +80,20 @@ class Neuron(AbstractInput):
         return self.psp
 
     def get_psp_value(self):
-        return self.psp.calculate_potential(self.inputs + [self.bias])
+        return self.psp.calculate_potential(self.get_inputs())
 
     def get_activator(self):
         return self.activator
 
     def get_weights(self):
-        return [input.get_weight() for input in self.inputs]
+        return [input.get_weight() for input in self.get_inputs()]
 
     def change_weight(self, input, value):
         edge = self.get_input_edge(input)
         edge.set_weight(edge.get_weight() + float(value))
+
+    def enable_bias(self):
+        self.get_bias().enable()
+
+    def disable_bias(self):
+        self.get_bias().disable()
