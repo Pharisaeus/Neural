@@ -79,6 +79,9 @@ class Neuron(AbstractInput):
     def get_psp(self):
         return self.psp
 
+    def get_psp_value(self):
+        return self.psp.calculate_potential(self.inputs + [self.bias])
+
     def get_activator(self):
         return self.activator
 
