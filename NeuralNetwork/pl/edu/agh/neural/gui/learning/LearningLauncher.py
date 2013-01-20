@@ -1,4 +1,5 @@
 from pl.edu.agh.neural.Layers import Layers
+from pl.edu.agh.neural.learning.backpropagation.gui.BackPropagationLearningDialog import BackPropagationLearningDialog
 from pl.edu.agh.neural.learning.cp.gui.CounterPropagationLearningDialog import CounterPropagationLearningDialog
 from pl.edu.agh.neural.learning.kohonen.gui.KohonenLearningDialog import KohonenLearningDialog
 
@@ -11,3 +12,5 @@ class LearningLauncher(object):
                 return CounterPropagationLearningDialog(network)
             else:
                 return KohonenLearningDialog(network)
+        else:
+            return BackPropagationLearningDialog(network)
