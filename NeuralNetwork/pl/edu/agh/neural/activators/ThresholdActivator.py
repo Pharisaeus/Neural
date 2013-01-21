@@ -25,4 +25,4 @@ class ThresholdActivator(Activator):
         return 1.0 / (1 + exp(-ThresholdActivator.FACTOR * argument))
 
     def derivative(self, argument):
-        return ThresholdActivator.FACTOR * argument * (1 - argument)
+        return ThresholdActivator.FACTOR * self.calculate_response(argument) * (1 - self.calculate_response(argument))

@@ -23,4 +23,6 @@ class SigmoidActivator(Activator):
         return 1.0 / (1 + exp(-argument))
 
     def derivative(self, argument):
-        return argument * (1 - argument)
+        if argument > 10:
+            print argument
+        return self.calculate_response(argument) * (1 - self.calculate_response(argument))
