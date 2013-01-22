@@ -5,7 +5,7 @@ from pl.edu.agh.neural.learning.kohonen.gui.KohonenLearningDialog import Kohonen
 
 class LearningLauncher(object):
     @staticmethod
-    def dialog(network):
+    def dialog(network, learning_data):
         layers = network.get_layers()
         if Layers.get_type(layers[0]) == Layers.KOHONEN_LAYER:
             if len(layers) == 2 and Layers.get_type(layers[1]) == Layers.GENERAL_LAYER:
@@ -13,4 +13,4 @@ class LearningLauncher(object):
             else:
                 return KohonenLearningDialog(network)
         else:
-            return BackPropagationLearningDialog(network)
+            return BackPropagationLearningDialog(network, learning_data)

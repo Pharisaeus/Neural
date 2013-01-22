@@ -19,6 +19,7 @@ class MainWindow(QMainWindow):
         self.ui.view.setScene(self.scene)
         self.ui.view.setRenderHint(QPainter.Antialiasing)
         self.test_data = None
+        self.learning_data = None
 
         self.creator = None
 
@@ -78,10 +79,11 @@ class MainWindow(QMainWindow):
 
     @pyqtSlot()
     def on_learnAction_triggered(self):
-        launcher = LearningLauncher.dialog(self.network)
+        launcher = LearningLauncher.dialog(self.network, self.learning_data)
         result = launcher.exec_()
         if result == QDialog.Accepted:
             self._show_network()
+            self.learning_data = launcher.get_model()
 
     def resizeEvent(self, QResizeEvent):
         self.ui.view.fitInView(self.scene.sceneRect(), Qt.KeepAspectRatio)

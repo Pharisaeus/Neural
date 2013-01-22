@@ -1,5 +1,3 @@
-from pl.edu.agh.neural.utils.DataNormalizer import DataNormalizer
-
 class BackpropagationLearning(object):
     def __init__(self, network, error_metric, learning_factor, momentum, bias_enabled):
         self.network = network
@@ -20,7 +18,7 @@ class BackpropagationLearning(object):
             for i in range(len(input_data)):
                 network_response = self.network.calculate_network_response(input_data[i])
                 error += self.back_propagate(output_data[i], network_response)
-        return error
+            print iteration, error
 
     def initialize_previous_weights(self):
         self.previous_weights = [[self.network.get_layer(i).get_neurons()[j].get_weights() for j in
@@ -45,7 +43,7 @@ class BackpropagationLearning(object):
                 next_layer_weights = [next_layer_neuron.get_weights()[j] for next_layer_neuron in
                                       next_layer_neurons]
                 layer_neuron_deltas.append(self.hidden_delta(neuron, next_layer_weights, deltas[0]))
-            deltas.insert(0,layer_neuron_deltas)
+            deltas.insert(0, layer_neuron_deltas)
         return deltas
 
     def update_weights(self, deltas):
@@ -55,7 +53,7 @@ class BackpropagationLearning(object):
                     delta_part = self.learning_factor * deltas[i][j] * neuron.get_inputs()[weight].get_value()
                     momentum_part = self.momentum * (neuron.get_weights()[weight] - self.previous_weights[i][j][weight])
                     self.previous_weights[i][j][weight] = neuron.get_weights()[weight] #update previous weight
-                    neuron.change_weight(weight,delta_part + momentum_part)
+                    neuron.change_weight(weight, delta_part + momentum_part)
 
     def output_delta(self, neuron, expected_output):
         ekj = neuron.get_psp_value()
